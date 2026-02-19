@@ -1,5 +1,7 @@
 import numpy as np
 import random
+import os
+import pickle
 
 import torch
 import torch.nn as nn
@@ -98,11 +100,29 @@ def generate_data(model, spatial_A_trans, rn_dict, parameters, SE):
     SE = SE.to(device)
     spatial_A_trans = torch.tensor(spatial_A_trans, dtype=torch.float).to(device)
     if parameters.dataset == "Chengdu":
-        length2num = np.load("/data/WeiTongLong/data/traj_gen/A_new_dataset/Chengdu/gen_all/length_distri.npy")
         start_length, end_length = 20, 60
-    if parameters.dataset == "Porto":
-        length2num = np.load("/data/WeiTongLong/data/traj_gen/A_new_dataset/Porto/gen_all/length_distri.npy")
+    else:
         start_length, end_length = 20, 100
+
+    data_dir = getattr(parameters, "data_dir", None)
+    if data_dir is None:
+        raise ValueError("Missing parameters.data_dir, cannot locate generation statistics.")
+
+    length_distri_path = os.path.join(data_dir, "gen_all", "length_distri.npy")
+    if os.path.exists(length_distri_path):
+        length2num = np.load(length_distri_path)
+    else:
+        eid_path = os.path.join(data_dir, "gen_all", "eid_seqs.bin")
+        if not os.path.exists(eid_path):
+            raise FileNotFoundError(
+                f"Cannot find '{length_distri_path}' or '{eid_path}' to build length distribution."
+            )
+        with open(eid_path, "rb") as f:
+            all_eids = pickle.load(f)
+        max_len = max(all_eids.keys())
+        length2num = np.zeros(max_len + 1, dtype=np.int64)
+        for k, seqs in all_eids.items():
+            length2num[int(k)] = len(seqs)
     # batchsize=1
     traj_all_num = int(length2num.sum())
     # batchsize=1
@@ -123,7 +143,5 @@ def generate_data(model, spatial_A_trans, rn_dict, parameters, SE):
                 output_seqs = toseq(rn_dict, ids,rates, parameters, save_txt_num = i)
                 curr_batch = curr_batch - _curr_batch
                 if curr_batch <= 0: break
-                exit()
             # print(output_seqs)
         # exit()
-

@@ -127,6 +127,8 @@ if __name__ == '__main__':
         path_dir = os.path.join(project_root, 'data', opts.dataset)
     else:
         path_dir = os.path.join(os.path.abspath(opts.data_root), opts.dataset)
+    args_dict['data_dir'] = path_dir
+    args.update(args_dict)
 
 
     extra_info_dir = os.path.join(path_dir, "extra_file")

@@ -322,3 +322,87 @@
 2026-02-20 00:44:40,807 INFO Epoch: 2 Time: 6m38s
 2026-02-20 00:44:40,811 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
 2026-02-20 00:44:40,812 INFO 	Train Loss:4430.565450518437	Train Const Loss:4430.37407063197	Train Diff Loss:0.12188263280060987	Train X0 Loss:0.06949637782306421
+2026-02-20 00:51:20,457 INFO Epoch: 3 Time: 6m38s
+2026-02-20 00:51:20,462 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 00:51:20,462 INFO 	Train Loss:4094.807903896034	Train Const Loss:4094.647304832714	Train Diff Loss:0.10206559100136382	Train X0 Loss:0.05853523287609629
+2026-02-20 00:58:00,597 INFO Epoch: 4 Time: 6m39s
+2026-02-20 00:58:00,602 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 00:58:00,602 INFO 	Train Loss:3856.391996177377	Train Const Loss:3856.2592936802976	Train Diff Loss:0.08167920540152707	Train X0 Loss:0.051025918454233016
+2026-02-20 01:04:41,211 INFO Epoch: 5 Time: 6m39s
+2026-02-20 01:04:41,216 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 01:04:41,216 INFO 	Train Loss:3814.812438643112	Train Const Loss:3814.6877323420076	Train Diff Loss:0.07476557270696449	Train X0 Loss:0.04993435038170573
+2026-02-20 01:11:21,818 INFO Epoch: 6 Time: 6m39s
+2026-02-20 01:11:21,822 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 01:11:21,823 INFO 	Train Loss:3758.306963743109	Train Const Loss:3758.189126394052	Train Diff Loss:0.07006344595252359	Train X0 Loss:0.04777889049695943
+2026-02-20 01:18:02,437 INFO Epoch: 7 Time: 6m39s
+2026-02-20 01:18:02,441 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 01:18:02,441 INFO 	Train Loss:3679.52025099492	Train Const Loss:3679.4126394052046	Train Diff Loss:0.061956668705385194	Train X0 Loss:0.04565721448336912
+2026-02-20 01:24:43,145 INFO Epoch: 8 Time: 6m39s
+2026-02-20 01:24:43,149 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 01:24:43,149 INFO 	Train Loss:3660.2219412594923	Train Const Loss:3660.1171003717473	Train Diff Loss:0.059932478019780716	Train X0 Loss:0.04490620869499212
+2026-02-20 01:31:23,829 INFO Epoch: 9 Time: 6m39s
+2026-02-20 01:31:23,834 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 01:31:23,834 INFO 	Train Loss:3658.6642689380283	Train Const Loss:3658.561338289963	Train Diff Loss:0.05813474342448561	Train X0 Loss:0.04479641336203314
+2026-02-20 01:38:04,639 INFO Epoch: 10 Time: 6m39s
+2026-02-20 01:38:04,644 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 01:38:04,644 INFO 	Train Loss:3608.3375169905144	Train Const Loss:3608.2407063197024	Train Diff Loss:0.05337406665547214	Train X0 Loss:0.043437213404536885
+2026-02-20 01:44:45,320 INFO Epoch: 11 Time: 6m39s
+2026-02-20 01:44:45,325 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 01:44:45,325 INFO 	Train Loss:3600.7530893828566	Train Const Loss:3600.657992565056	Train Diff Loss:0.05181834876509626	Train X0 Loss:0.04327888394962152
+2026-02-20 01:51:26,120 INFO Epoch: 12 Time: 6m39s
+2026-02-20 01:51:26,125 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 01:51:26,125 INFO 	Train Loss:3597.065761325971	Train Const Loss:3596.971654275093	Train Diff Loss:0.05103431799735521	Train X0 Loss:0.04307254619522498
+2026-02-20 01:58:06,933 INFO Epoch: 13 Time: 6m39s
+2026-02-20 01:58:06,937 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 01:58:06,937 INFO 	Train Loss:3573.955468212583	Train Const Loss:3573.864312267658	Train Diff Loss:0.048553729834914426	Train X0 Loss:0.04259898081736909
+2026-02-20 02:04:47,776 INFO Epoch: 14 Time: 6m40s
+2026-02-20 02:04:47,781 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 02:04:47,782 INFO 	Train Loss:3564.3953781099126	Train Const Loss:3564.3048327137544	Train Diff Loss:0.0484431682692903	Train X0 Loss:0.04210160199905915
+2026-02-20 02:11:28,202 INFO Epoch: 15 Time: 6m39s
+2026-02-20 02:11:28,204 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 02:11:28,205 INFO 	Train Loss:3566.4726958120846	Train Const Loss:3566.3828996282527	Train Diff Loss:0.04769875736540135	Train X0 Loss:0.042097002351795046
+2026-02-20 02:18:09,112 INFO Epoch: 16 Time: 6m40s
+2026-02-20 02:18:09,116 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 02:18:09,117 INFO 	Train Loss:3554.5084502921895	Train Const Loss:3554.4200743494425	Train Diff Loss:0.04660908723826482	Train X0 Loss:0.041766690959302244
+2026-02-20 02:24:49,908 INFO Epoch: 17 Time: 6m39s
+2026-02-20 02:24:49,912 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 02:24:49,912 INFO 	Train Loss:3549.468608970314	Train Const Loss:3549.3805762081784	Train Diff Loss:0.04650776413854447	Train X0 Loss:0.04152787773994137
+2026-02-20 02:31:30,293 INFO Epoch: 18 Time: 6m39s
+2026-02-20 02:31:30,295 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 02:31:30,295 INFO 	Train Loss:3552.858426151112	Train Const Loss:3552.7704460966543	Train Diff Loss:0.04629674901299483	Train X0 Loss:0.041689463285642735
+2026-02-20 02:38:10,937 INFO Epoch: 19 Time: 6m39s
+2026-02-20 02:38:10,942 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 02:38:10,942 INFO 	Train Loss:3546.4931318502886	Train Const Loss:3546.406133828996	Train Diff Loss:0.04562928107027034	Train X0 Loss:0.04136950152945189
+2026-02-20 02:44:51,543 INFO Epoch: 20 Time: 6m39s
+2026-02-20 02:44:51,548 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 02:44:51,548 INFO 	Train Loss:3546.452727224082	Train Const Loss:3546.3657063197024	Train Diff Loss:0.04556587648657618	Train X0 Loss:0.04145568844318722
+2026-02-20 02:51:32,227 INFO Epoch: 21 Time: 6m39s
+2026-02-20 02:51:32,232 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 02:51:32,232 INFO 	Train Loss:3545.465125938109	Train Const Loss:3545.378252788104	Train Diff Loss:0.045488647764746	Train X0 Loss:0.0413885219771325
+2026-02-20 02:58:12,938 INFO Epoch: 22 Time: 6m39s
+2026-02-20 02:58:12,943 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 02:58:12,943 INFO 	Train Loss:3542.173007237424	Train Const Loss:3542.086431226766	Train Diff Loss:0.0451625906204507	Train X0 Loss:0.041416061196483146
+2026-02-20 03:04:53,311 INFO Epoch: 23 Time: 6m39s
+2026-02-20 03:04:53,313 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 03:04:53,313 INFO 	Train Loss:3542.8898115120414	Train Const Loss:3542.80343866171	Train Diff Loss:0.04499142241688466	Train X0 Loss:0.041381366832223355
+2026-02-20 03:11:33,878 INFO Epoch: 24 Time: 6m39s
+2026-02-20 03:11:33,883 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 03:11:33,883 INFO 	Train Loss:3539.227142237376	Train Const Loss:3539.1407992565055	Train Diff Loss:0.04509852554295974	Train X0 Loss:0.041241454971490295
+2026-02-20 03:18:13,927 INFO Epoch: 25 Time: 6m39s
+2026-02-20 03:18:13,929 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 03:18:13,929 INFO 	Train Loss:3540.5184175354398	Train Const Loss:3540.432156133829	Train Diff Loss:0.044927608745854664	Train X0 Loss:0.041327194812955145
+2026-02-20 03:24:54,137 INFO Epoch: 26 Time: 6m39s
+2026-02-20 03:24:54,140 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 03:24:54,140 INFO 	Train Loss:3541.2288744932657	Train Const Loss:3541.142657992565	Train Diff Loss:0.045017893524792005	Train X0 Loss:0.041196346785405784
+2026-02-20 03:31:34,804 INFO Epoch: 27 Time: 6m39s
+2026-02-20 03:31:34,809 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 03:31:34,809 INFO 	Train Loss:3537.2876389614935	Train Const Loss:3537.2016728624535	Train Diff Loss:0.04480939794619149	Train X0 Loss:0.041158010894917364
+2026-02-20 03:38:15,187 INFO Epoch: 28 Time: 6m39s
+2026-02-20 03:38:15,190 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 03:38:15,190 INFO 	Train Loss:3538.474929929112	Train Const Loss:3538.388940520446	Train Diff Loss:0.04484447508835715	Train X0 Loss:0.041144881011454255
+2026-02-20 03:44:55,457 INFO Epoch: 29 Time: 6m39s
+2026-02-20 03:44:55,460 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 03:44:55,460 INFO 	Train Loss:3540.10325806635	Train Const Loss:3540.0171933085503	Train Diff Loss:0.044742040139221374	Train X0 Loss:0.041321395160664964
+2026-02-20 03:51:35,750 INFO Epoch: 30 Time: 6m39s
+2026-02-20 03:51:35,753 INFO log_vars:[tensor([1.], device='cuda:0', grad_fn=<PowBackward0>), tensor([1.], device='cuda:0', grad_fn=<PowBackward0>)]
+2026-02-20 03:51:35,753 INFO 	Train Loss:3537.4344241153794	Train Const Loss:3537.3485130111526	Train Diff Loss:0.04471118072200165	Train X0 Loss:0.04120146147958713

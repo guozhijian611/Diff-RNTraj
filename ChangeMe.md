@@ -228,3 +228,32 @@ RuntimeError: one of the variables needed for gradient computation has been modi
 
 - 单步前向+反向传播验证通过（`loss.backward()` 正常）。
 - 可继续进行 `multi_main.py` 训练流程。
+
+## 11. 新增修复：生成阶段长度分布路径硬编码
+
+### 11.1 问题现象
+
+运行生成命令时报错：
+
+```text
+FileNotFoundError: ... /data/WeiTongLong/data/traj_gen/A_new_dataset/Porto/gen_all/length_distri.npy
+```
+
+### 11.2 根因
+
+`models/multi_train.py` 的 `generate_data()` 仍使用作者机器绝对路径读取 `length_distri.npy`。
+
+### 11.3 已完成改动
+
+- `models/multi_train.py`
+  - 移除 `length_distri.npy` 的作者绝对路径硬编码。
+  - 改为优先读取：`<data_dir>/gen_all/length_distri.npy`。
+  - 当该文件不存在时，自动从 `<data_dir>/gen_all/eid_seqs.bin` 统计长度分布（动态构建 `length2num`）。
+  - 移除生成循环中的 `exit()`，避免中途提前退出。
+- `generate_data.py`
+  - 将当前解析出的数据目录写入 `args.data_dir`，供 `models/multi_train.py::generate_data()` 使用。
+
+### 11.4 修复后行为
+
+- 不再依赖作者本机路径。
+- 在无 `length_distri.npy` 的情况下也可继续生成（回退到 `eid_seqs.bin` 统计）。
