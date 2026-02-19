@@ -193,6 +193,14 @@ if __name__ == '__main__':
     
 
     model_path = './results/{}/'.format(args.dataset)
-    model.load_state_dict(torch.load(model_path + 'val-best-model.pt', map_location=device))
+    model_ckpt = os.path.join(model_path, 'val-best-model.pt')
+    if not os.path.exists(model_ckpt):
+        raise FileNotFoundError(
+            f"Model checkpoint not found: {model_ckpt}\n"
+            f"Please train first, e.g.:\n"
+            f"python multi_main.py --dataset {args.dataset} --diff_T {opts.diff_T} "
+            f"--pre_trained_dim {opts.pre_trained_dim} --rdcl {opts.rdcl}"
+        )
+    model.load_state_dict(torch.load(model_ckpt, map_location=device))
     start_time = time.time()
     generate_data(model, spatial_A_trans, rn_dict, args, SE)

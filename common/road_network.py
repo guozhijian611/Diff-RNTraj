@@ -4,6 +4,7 @@ from osgeo import ogr
 from .spatial_func import SPoint, distance
 from .mbr import MBR
 import copy
+import os
 
 
 class UndirRoadNetwork(nx.Graph):
@@ -125,35 +126,57 @@ class RoadNetwork(nx.DiGraph):
 def load_rn_shp(path, is_directed=True):
     edge_spatial_idx = Rtree()
     edge_idx = {}
-    # node uses coordinate as key
-    # edge uses coordinate tuple as key
-    g = nx.read_shp(path, simplify=True, strict=False)
-    if not is_directed:
-        g = g.to_undirected()
-    # node attrs: nid, pt, ...
-    for n, data in g.nodes(data=True):
-        data['pt'] = SPoint(n[1], n[0])
-        if 'ShpName' in data:
-            del data['ShpName']
-    # edge attrs: eid, length, coords, ...
-    for u, v, data in g.edges(data=True):
-        geom_line = ogr.CreateGeometryFromWkb(data['Wkb'])
+    # NetworkX 3.x removed read_shp; parse edges directly with OGR.
+    if os.path.isdir(path):
+        edges_shp = os.path.join(path, 'edges.shp')
+        if not os.path.exists(edges_shp):
+            raise FileNotFoundError(f"Cannot find edges shapefile: {edges_shp}")
+    else:
+        edges_shp = path
+
+    ds = ogr.Open(edges_shp)
+    if ds is None:
+        raise FileNotFoundError(f"Failed to open shapefile: {edges_shp}")
+    layer = ds.GetLayer(0)
+
+    g = nx.DiGraph()
+    layer_defn = layer.GetLayerDefn()
+    field_names = [layer_defn.GetFieldDefn(i).GetName() for i in range(layer_defn.GetFieldCount())]
+
+    for feature in layer:
+        geom_line = feature.GetGeometryRef()
+        if geom_line is None or geom_line.GetPointCount() < 2:
+            continue
+
         coords = []
         for i in range(geom_line.GetPointCount()):
-            geom_pt = geom_line.GetPoint(i)
-            coords.append(SPoint(geom_pt[1], geom_pt[0]))
-        data['eid'] = data['fid']
+            lng, lat, *_ = geom_line.GetPoint(i)
+            coords.append(SPoint(lat, lng))
+
+        u = (coords[0].lng, coords[0].lat)
+        v = (coords[-1].lng, coords[-1].lat)
+        g.add_node(u, pt=SPoint(u[1], u[0]))
+        g.add_node(v, pt=SPoint(v[1], v[0]))
+
+        data = {name: feature.GetField(name) for name in field_names}
+        eid = data.get('fid', feature.GetFID())
+        if eid is None:
+            eid = feature.GetFID()
+        eid = int(eid)
+        while eid in edge_idx:
+            eid += 1
+
+        data['eid'] = eid
         data['coords'] = coords
-        # print(coords)
         data['length'] = sum([distance(coords[i], coords[i + 1]) for i in range(len(coords) - 1)])
+        g.add_edge(u, v, **data)
+
         env = geom_line.GetEnvelope()
-        edge_spatial_idx.insert(data['eid'], (env[0], env[2], env[1], env[3]))
-        # exit()
-        edge_idx[data['eid']] = (u, v)
-        del data['ShpName']
-        del data['Json']
-        del data['Wkt']
-        del data['Wkb']
+        edge_spatial_idx.insert(eid, (env[0], env[2], env[1], env[3]))
+        edge_idx[eid] = (u, v)
+
+    if not is_directed:
+        g = g.to_undirected()
     print('# of nodes:{}'.format(g.number_of_nodes()))
     print('# of edges:{}'.format(g.number_of_edges()))
     if not is_directed:

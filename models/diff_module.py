@@ -145,12 +145,10 @@ class Residual_block(nn.Module):
 
     def forward(self, x, diffusion_step_embed):
         # x, mel_spec, diffusion_step_embed = input_data
-        h = x
-        
-
         # add in diffusion step embedding
         part_t = self.fc_t(diffusion_step_embed)
-        h += part_t
+        # Avoid in-place update on tensors needed by autograd.
+        h = x + part_t
 
         h = h.permute(0, 2, 1)
         B, C, L = h.shape
