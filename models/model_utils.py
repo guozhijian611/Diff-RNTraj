@@ -123,7 +123,7 @@ def toseq(rn_dict, rids, rates, parameters, save_txt_num = 0):
 
     batch_size = rids.size(1)
     trg_len = rids.size(0)
-    seqs = torch.zeros(trg_len, batch_size, 2).to("cuda:0")
+    seqs = torch.zeros(trg_len, batch_size, 2, device=rids.device)
     # traj_save_path = '/data/WeiTongLong/code/traj_gen/generate_data/chengdu/wo_spatial_loss/'
     traj_save_path = './generate_data/{}/'.format(parameters.dataset)
     if not os.path.exists(traj_save_path):

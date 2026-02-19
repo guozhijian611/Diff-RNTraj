@@ -4,12 +4,11 @@ import torch
 import torch.nn as nn
 from collections import Counter
 
-def std_normal(size):
+def std_normal(size, device):
     """
     Generate the standard Gaussian variable of a certain size
     """
-
-    return torch.normal(0, 1, size=size).cuda()
+    return torch.normal(0, 1, size=size, device=device)
 
 def diff_forward_x0_constraint(net, x, diffusion_hyperparams, SE, spatial_A_trans):
     """
@@ -20,11 +19,10 @@ def diff_forward_x0_constraint(net, x, diffusion_hyperparams, SE, spatial_A_tran
     
     # audio = x
     B, C, L = x.shape  # B is batchsize, C=1, L is audio length
-    diffusion_steps = torch.randint(T, size=(B,1,1)).cuda()  # randomly sample diffusion steps from 1~T
-    diffusion_steps_1 = torch.randint(1, size=(B,1,1)).cuda()  # randomly sample diffusion steps from 1~T
+    device = x.device
+    diffusion_steps = torch.randint(T, size=(B,1,1), device=device)  # randomly sample diffusion steps from 1~T
     
-    z = std_normal(x.shape)
-    z_x1 = std_normal(x.shape)
+    z = std_normal(x.shape, device)
     
     xt = torch.sqrt(Alpha_bar[diffusion_steps]) * x + torch.sqrt(1-Alpha_bar[diffusion_steps]) * z  # compute x_t from q(x_t|x_0)
     #这里得到的是噪声, loss函数之一
@@ -49,7 +47,8 @@ def cal_x0_from_noise_ddpm(net, diffusion_hyperparams, batchsize, length,  featu
     _dh = diffusion_hyperparams
     T, Alpha_bar, Alpha = _dh["T"], _dh["alpha_bar"], _dh["alpha"]
     
-    diff_input = std_normal((batchsize, length, feature))
+    device = Alpha.device
+    diff_input = std_normal((batchsize, length, feature), device)
     
     with torch.no_grad():
         for t in range(T-1, -1, -1):
@@ -61,7 +60,7 @@ def cal_x0_from_noise_ddpm(net, diffusion_hyperparams, batchsize, length,  featu
             diff_input = coeff1 * (diff_input - coeff2 * predict_noise)
             
             if t>0:
-                noise = std_normal(diff_input.shape)
+                noise = std_normal(diff_input.shape, device)
                 sigma = ( (1 - Alpha_bar[t-1]) / (1 - Alpha_bar[t]) * (1 - Alpha[t]) ) ** 0.5
                 diff_input += sigma * noise
                 

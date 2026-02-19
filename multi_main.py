@@ -6,7 +6,6 @@ import sys
 import argparse
 import pandas as pd
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 import torch
 import torch.optim as optim
 import numpy as np
@@ -115,8 +114,8 @@ if __name__ == '__main__':
     beta = np.linspace(opts.beta_start ** 0.5, opts.beta_end ** 0.5, opts.diff_T) ** 2
     alpha = 1 - beta
     alpha_bar = np.cumprod(alpha)
-    alpha = torch.tensor(alpha).float().to("cuda:0")
-    alpha_bar = torch.tensor(alpha_bar).float().to("cuda:0")
+    alpha = torch.tensor(alpha).float().to(device)
+    alpha_bar = torch.tensor(alpha_bar).float().to(device)
 
     diffusion_hyperparams = {}
     diffusion_hyperparams['T'], diffusion_hyperparams['alpha_bar'], diffusion_hyperparams['alpha'] = opts.diff_T,  alpha_bar, alpha
