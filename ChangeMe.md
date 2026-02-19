@@ -137,3 +137,94 @@ RuntimeError: No CUDA GPUs are available
 - 有 GPU 时自动使用 CUDA。
 - 无 GPU 时自动回退 CPU，不再因 `cuda:0` 硬编码崩溃。
 - 当前命令已可通过设备初始化阶段，后续仅在数据缺失时给出清晰文件提示。
+
+## 7. 新增修复：`networkx` 版本兼容（`read_shp` 移除）
+
+### 7.1 问题现象
+
+运行时出现：
+
+```text
+AttributeError: module 'networkx' has no attribute 'read_shp'
+```
+
+### 7.2 根因
+
+项目原逻辑依赖 `nx.read_shp`。该接口在新版本 `networkx` 中已移除。
+
+### 7.3 已完成改动
+
+- `common/road_network.py`
+  - 重写 `load_rn_shp` 的读图逻辑，改为通过 `osgeo.ogr` 直接读取 `edges.shp`。
+  - 保留原有图结构约定：节点仍为 `(lng, lat)` tuple，边上保留 `eid/coords/length` 等字段。
+  - 保留空间索引 `Rtree` 与 `edge_idx` 构建逻辑。
+  - 支持传入目录（自动查找 `edges.shp`）或直接传入 shapefile 路径。
+
+### 7.4 修复后行为
+
+- 不再依赖 `networkx` 已删除接口。
+- `Porto/Chengdu` 路网可正常加载（节点/边数量可正常打印）。
+
+## 8. 新增修复：路径拼接兼容
+
+### 8.1 问题现象
+
+出现路径错误：
+
+```text
+.../extra_fileraw_rn_dict.json
+```
+
+### 8.2 根因
+
+原工具函数使用字符串拼接 `dir + file_name`，当 `dir` 不以 `/` 结尾时会拼接失败。
+
+### 8.3 已完成改动
+
+- `utils/utils.py`
+  - 新增内部函数 `_build_path(dir_path, file_name)`。
+  - `save_pkl_data/load_pkl_data/save_json_data/load_json_data` 统一改为 `os.path.join(...)`。
+
+### 8.4 修复后行为
+
+- 目录末尾是否带 `/` 都可正确读写文件。
+
+## 9. 新增修复：模型加载提示优化
+
+### 9.1 问题现象
+
+生成阶段缺少训练权重时，直接报文件不存在，提示不够明确。
+
+### 9.2 已完成改动
+
+- `generate_data.py`
+  - 在加载 `./results/<dataset>/val-best-model.pt` 前先检查是否存在。
+  - 缺失时抛出清晰提示，并给出对应训练命令示例。
+
+## 10. 新增修复：训练反向传播 Inplace 错误
+
+### 10.1 问题现象
+
+训练时报错：
+
+```text
+RuntimeError: one of the variables needed for gradient computation has been modified by an inplace operation
+```
+
+### 10.2 根因
+
+`models/diff_module.py` 中 `Residual_block.forward` 对中间张量使用了原地加法：
+
+- 旧逻辑：`h = x` 后 `h += part_t`
+
+该写法会修改 autograd 依赖的张量版本，导致反传失败。
+
+### 10.3 已完成改动
+
+- `models/diff_module.py`
+  - 改为非原地写法：`h = x + part_t`。
+
+### 10.4 修复后行为
+
+- 单步前向+反向传播验证通过（`loss.backward()` 正常）。
+- 可继续进行 `multi_main.py` 训练流程。
