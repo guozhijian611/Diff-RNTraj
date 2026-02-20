@@ -1,5 +1,12 @@
 # 变更说明
 
+## 0.运行环境
+```bash
+conda create -p ./env python=3.10 -y
+conda activate ./env
+pip install torch numpy pandas tqdm networkx scikit-learn matplotlib chinese-calendar nni rtree
+conda install -c conda-forge gdal rtree 
+```
 ## 1. 问题背景
 
 运行以下命令时报错：
